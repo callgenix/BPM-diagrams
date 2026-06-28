@@ -1,0 +1,41 @@
+flowchart TD
+    A([Strategic Sourcing]) --> B[Spend Analysis]
+    %% ⚡ CHANGED SECTION
+    B --> B1{Budget Available?}
+    B1 --> |No| B2([Process Terminated - No Budget])
+    B1 --> |Yes| C[Procurement Strategy]
+    %% ⚡ END CHANGED SECTION
+    C --> D{Sole Source?}
+    D --> |Yes| E[Draft Justification]
+    D --> |No| F[Supplier Pre-Qual]
+    E --> G[Legal Review]
+    G --> H{Approved?}
+    H --> |No| I[Revise]
+    I --> G
+    H --> |Yes| J[Direct Negotiation]
+    F --> K[Market Research]
+    K --> L[Longlist]
+    L --> M[RFI]
+    M --> N[RFI Eval]
+    N --> O[Shortlist]
+    O --> P[RFP]
+    P --> Q[Q&A]
+    Q --> R[Final Proposals]
+    R --> S[Evaluation Panel]
+    S --> T[Score]
+    T --> U{Above 75?}
+    U --> |No| V[Reject]
+    U --> |Yes| W[Due Diligence]
+    J --> W
+    V --> P
+    W --> X[Contract]
+    X --> Y([Executed])
+
+%% ========================================================
+%% CLAUDE'S CHANGE INTERPRETATION
+%% ========================================================
+%% OBJECTIVE: Prevent procurement activities from proceeding without confirmed budget, avoiding wasted effort and unauthorized spending commitments.
+%%
+%% EXPLANATION:
+%% Added a "Budget Available?" decision point immediately after the Spend Analysis step. If no budget is available, the flow terminates at a "Process Terminated - No Budget" end node. If budget is confirmed, the flow continues to the Procurement Strategy step as before.
+%% ========================================================
