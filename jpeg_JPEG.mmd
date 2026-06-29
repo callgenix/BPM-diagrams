@@ -14,17 +14,17 @@ sequenceDiagram
         S->>IT: Provision accounts
     else No approval after 48h
         S->>M: Escalate stalled approval
-        M->>F: Escalation: expedite credit check
-        F-->>M: Expedited approval/denial
+        M->>F: Escalation: urgent credit check follow-up
+        F-->>M: Expedited approval / rejection
         alt Approved
             M->>S: Approval confirmed
             S->>IT: Provision accounts
-        else Denied
-            M->>S: Denial confirmed
-            S->>C: Onboarding rejected notification
+        else Rejected
+            M->>S: Rejection confirmed
+            S->>C: Onboarding denied notification
         end
     end
-    %% ⚡ END CHANGED SECTION
+    %% END CHANGED SECTION
 
     IT-->>C: Welcome email + credentials
     C->>IT: First login confirmation
