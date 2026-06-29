@@ -6,18 +6,25 @@ sequenceDiagram
     participant IT as IT Ops
 
     C->>S: Submit onboarding request
-    S->>F: Credit check request
-    F-->>S: Approval (24h SLA)
 
     %% ⚡ CHANGED SECTION
-    alt Approval received within 24h
-        S->>IT: Provision accounts
-    else No approval after 48h
-        S->>M: Escalate stalled approval
-        M->>F: Escalation: approval overdue (48h+)
-        F-->>M: Expedited approval
-        M-->>S: Approval confirmed
-        S->>IT: Provision accounts
+    S->>S: Assess risk (credit score, company verification, history)
+
+    alt Low-risk (score >750, verified company, clean history)
+        S->>IT: Provision accounts (Finance bypass)
+    else High-risk (standard approval path)
+        S->>F: Credit check request
+        F-->>S: Approval (24h SLA)
+
+        alt Approval received within 24h
+            S->>IT: Provision accounts
+        else No approval after 48h
+            S->>M: Escalate stalled approval
+            M->>F: Escalation: approval overdue (48h+)
+            F-->>M: Expedited approval
+            M-->>S: Approval confirmed
+            S->>IT: Provision accounts
+        end
     end
     %% ⚡ END CHANGED SECTION
 
