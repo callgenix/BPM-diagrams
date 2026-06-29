@@ -14,14 +14,10 @@ sequenceDiagram
         S->>IT: Provision accounts
     else No approval after 48h
         S->>M: Escalate stalled approval
-        M->>F: Escalation: Approval overdue (48h+)
-        F-->>M: Expedited approval decision
-        M-->>S: Relay approval outcome
-        alt Approved after escalation
-            S->>IT: Provision accounts
-        else Denied after escalation
-            S->>C: Onboarding denied notification
-        end
+        M->>F: Escalation: approval overdue (48h+)
+        F-->>M: Expedited approval
+        M-->>S: Approval confirmed
+        S->>IT: Provision accounts
     end
     %% ⚡ END CHANGED SECTION
 
